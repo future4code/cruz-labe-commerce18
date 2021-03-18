@@ -10,7 +10,8 @@ const DivProduto = styled.div`
 display: flex;
 flex-direction: column;
 background-color: whitesmoke;
-box-shadow: 2px 3px 5px (rgba(0,0,0,.4));
+box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+margin: 5px;
 `
 const DivQtdProduto = styled.div`
 display: flex;
@@ -23,6 +24,7 @@ p {
 `
 const AreaProduto = styled.div`
 display: flex;
+flex-wrap: wrap;
 `
 
 export default class Produtos extends React.Component {
@@ -31,7 +33,7 @@ export default class Produtos extends React.Component {
         return (
             <ContainerDivProduto>
                 <DivQtdProduto>
-                    <p>Quantidade de produtos: 1{/* provelmente uma props*/}</p>
+                    <p contentEditable={true}>Quantidade de produtos: 1{/* provelmente uma props*/}</p>
                     <label>
                         Ordenação:
                         <select>
@@ -41,6 +43,38 @@ export default class Produtos extends React.Component {
                     </label>
                 </DivQtdProduto>
                 <AreaProduto>
+                    <DivProduto>
+                        <img src={'https://picsum.photos/200/200?a=2'}/>
+                        <div>
+                            <p>Produto 1</p>
+                            <p>R$ 100,00</p>
+                            <button>Adicionar ao carrinho</button>
+                        </div>
+                    </DivProduto>
+                    <DivProduto>
+                        <img src={'https://picsum.photos/200/200?a=2'}/>
+                        <div>
+                            <p>Produto 1</p>
+                            <p>R$ 100,00</p>
+                            <button>Adicionar ao carrinho</button>
+                        </div>
+                    </DivProduto>
+                    <DivProduto>
+                        <img src={'https://picsum.photos/200/200?a=2'}/>
+                        <div>
+                            <p>Produto 1</p>
+                            <p>R$ 100,00</p>
+                            <button>Adicionar ao carrinho</button>
+                        </div>
+                    </DivProduto>
+                    <DivProduto>
+                        <img src={'https://picsum.photos/200/200?a=2'}/>
+                        <div>
+                            <p>Produto 1</p>
+                            <p>R$ 100,00</p>
+                            <button>Adicionar ao carrinho</button>
+                        </div>
+                    </DivProduto>
                     <DivProduto>
                         <img src={'https://picsum.photos/200/200?a=2'}/>
                         <div>
