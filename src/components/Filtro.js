@@ -28,7 +28,7 @@ export default class Filtro extends React.Component {
                     Valor mínimo:
                     <input
                     onChange={this.props.alteraFiltroMinimo}
-                    type={Number}
+                    type={'number'}
                     value={this.props.valorFiltroMinimo}
                     />
                 </Label>
@@ -36,7 +36,7 @@ export default class Filtro extends React.Component {
                     Valor máximo:
                     <input
                     onChange={this.props.alteraFiltroMaximo}
-                    type={Number}
+                    type={'number'}
                     value={this.props.valorFiltroMaximo}
                     />
                 </Label>
