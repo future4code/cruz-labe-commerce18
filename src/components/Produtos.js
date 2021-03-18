@@ -33,7 +33,7 @@ export default class Produtos extends React.Component {
         return (
             <ContainerDivProduto>
                 <DivQtdProduto>
-                    <p contentEditable={true}>Quantidade de produtos: 1{/* provelmente uma props*/}</p>
+                    <p>Quantidade de produtos: 1{/* provelmente uma props*/}</p>
                     <label>
                         Ordenação:
                         <select>

@@ -14,6 +14,12 @@ flex-direction: column;
 
 export default class Filtro extends React.Component {
 
+    fitroProdutos = () => {
+        if(this.props.valorFiltroMinino > 10) {
+            
+        }
+    }
+
     render() {
         return (
             <AreaFiltro>
@@ -21,22 +27,25 @@ export default class Filtro extends React.Component {
                 <Label>
                     Valor mínimo:
                     <input
+                    onChange={this.props.alteraFiltroMinimo}
                     type={Number}
-                    value={100}
+                    value={this.props.valorFiltroMinimo}
                     />
                 </Label>
                 <Label>
                     Valor máximo:
                     <input
+                    onChange={this.props.alteraFiltroMaximo}
                     type={Number}
-                    value={1000}
+                    value={this.props.valorFiltroMaximo}
                     />
                 </Label>
                 <Label>
                     Buscar por nome:
                     <input
+                    onChange={this.props.alteraFiltroNome}
                     type={'Text'}
-                    value={'Produto'}
+                    value={this.props.valorFiltroNome}
                     />
                 </Label>
             </AreaFiltro>
