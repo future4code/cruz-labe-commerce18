@@ -44,7 +44,7 @@ export default class Filtro extends React.Component {
                     Buscar por nome:
                     <input
                     onChange={this.props.alteraFiltroNome}
-                    type={'Text'}
+                    type={'text'}
                     value={this.props.valorFiltroNome}
                     />
                 </Label>

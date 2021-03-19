@@ -59,7 +59,6 @@ const produtos = [
     imagem: "https://picsum.photos/200/200?a=3",
     preco: 300,
   }
-
 ]
 
 
@@ -80,7 +79,7 @@ class App extends React.Component {
     // }
     return this.setState({ abreCarrinho: !this.state.abreCarrinho})
   }
-v
+
   inputFiltroMinimo = (event) => {
     this.setState({ filtroMinimo: event.target.value})
   }
@@ -91,6 +90,18 @@ v
 
   inputFiltroNome = (event) => {
     this.setState({ filtroNome: event.target.value})
+  }
+
+  adicionarNoCarrinho = (idDoProduto) => {
+    const novoProduto = {
+      nome: produtos.nome,
+      quantidade: 1
+    }
+
+    
+    const produtoAcumlado = [...this.state.produtoNoCarrinho, novoProduto]
+
+    this.setState({ produtoNoCarrinho: produtoAcumlado})
   }
 
   render () {
@@ -120,7 +131,13 @@ v
           valorFiltroNome={this.state.filtroNome}
           alteraFiltroNome={this.inputFiltroNome}
           />
-          <Produtos/>
+          <Produtos
+          produtos={produtos}
+          adicionarNoCarrinho={this.adicionarNoCarrinho}
+          valorFiltroMinimo={this.state.filtroMinimo}
+          valorFiltroMaximo={this.state.filtroMaximo}
+          valorFiltroNome={this.state.filtroNome}
+          />
           <Carrinho mostrar={this.state.abreCarrinho}/>
         </AppContainer>
       </div>
