@@ -29,6 +29,7 @@ flex-wrap: wrap;
 
 export default class Produtos extends React.Component {
     
+    
     // eh maior retorne os produtos maiores que o minimo
     // eh menor retorne os produtos menores que o maximo
     // eh igual ao nome me retorne porduts com este nemo
@@ -39,6 +40,7 @@ export default class Produtos extends React.Component {
         .filter((produto) => this.props.valorFiltroMinimo ? produto.preco >= this.props.valorFiltroMinimo : true)
         .filter((produto) => this.props.valorFiltroMaximo ? produto.preco <= this.props.valorFiltroMaximo : true)
         .filter((produto) => this.props.valorFiltroNome ? produto.nome.includes(this.props.valorFiltroNome) : true)
+        // .sort()
         
         // return this.props.produtos.filter((produto) => {
             
@@ -76,7 +78,7 @@ export default class Produtos extends React.Component {
                     <p>Quantidade de produtos: {mostrarProdutos.length}</p>
                     <label>
                         Ordenação:
-                        <select>
+                        <select onChange value>
                             <option value={'crescente'}>Crescente</option>
                             <option value={'decrescente'}>Decrescente</option>
                         </select>

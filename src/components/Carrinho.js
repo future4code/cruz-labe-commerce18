@@ -45,15 +45,19 @@ margin: 1rem;
 export default class Carrinho extends React.Component {
     
     render() {
-        
-        console.log('props carrinho',this.props.mostrar)
+        const produtosNoCarrinho = this.props.produtoNoCarrinho.map((item) => {
+                return (
+                <div>
+                    <p>{item.quantidade}x</p>
+                    <ItenProduto>{item.nome}</ItenProduto>
+                    <button>x</button>
+                </div>)
+                
+        })
+
         return (<AreaCarrinho teste={this.props.mostrar}>
                 <CarrinhoH2>Carrinho</CarrinhoH2>
-                <div>
-                    <p>1x</p>
-                    <ItenProduto>Produto 1</ItenProduto>
-                    <button>x</button>
-                </div>
+                {produtosNoCarrinho}
                 <div>Valor total: R$ 200,00</div>
             </AreaCarrinho>
         )

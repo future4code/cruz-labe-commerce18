@@ -93,19 +93,35 @@ class App extends React.Component {
   }
 
   adicionarNoCarrinho = (idDoProduto) => {
-    const novoProduto = {
-      nome: produtos.nome,
-      quantidade: 1
+    const novoProduto = this.state.produtoNoCarrinho.find(produto => idDoProduto === produto.id)
+    // aramazenado o produto 1 com propriedads id,nome,imagem,preco,quantidade:2
+    if (novoProduto) {
+      
+      const adicionadoNoCarrinho = this.state.produtoNoCarrinho.map((produto) => {
+        
+        if (idDoProduto === produto.id) {
+          console.log('segundo if')
+          return {
+            ...produto,
+            quantidade: produto.quantidade +1
+          }
+        }
+        console.log('fora dos ifs')
+        return produto
+      })
+      this.setState({produtoNoCarrinho: adicionadoNoCarrinho})
+    } else { 
+      const adicionarProduto = produtos.find(produto => idDoProduto === produto.id)
+
+      const produtoAcumlado = [...this.state.produtoNoCarrinho, {...adicionarProduto, quantidade: 1}]
+      
+      this.setState({ produtoNoCarrinho: produtoAcumlado})
     }
-
-    
-    const produtoAcumlado = [...this.state.produtoNoCarrinho, novoProduto]
-
-    this.setState({ produtoNoCarrinho: produtoAcumlado})
+        
   }
 
   render () {
-    console.log('props app',this.state.abreCarrinho)
+    
     return (
       <div>
         <Header>
@@ -138,7 +154,10 @@ class App extends React.Component {
           valorFiltroMaximo={this.state.filtroMaximo}
           valorFiltroNome={this.state.filtroNome}
           />
-          <Carrinho mostrar={this.state.abreCarrinho}/>
+          <Carrinho 
+          mostrar={this.state.abreCarrinho}
+          produtoNoCarrinho={this.state.produtoNoCarrinho}
+          />
         </AppContainer>
       </div>
     );
