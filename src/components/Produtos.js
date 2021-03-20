@@ -28,20 +28,23 @@ flex-wrap: wrap;
 `
 
 export default class Produtos extends React.Component {
-    
-    
-    // eh maior retorne os produtos maiores que o minimo
-    // eh menor retorne os produtos menores que o maximo
-    // eh igual ao nome me retorne porduts com este nemo
-    // N/A retorne o array
 
+    state = {
+        ordenar: ''
+    }
+
+    produtoOrdenado = (event) => {
+        this.setState({ ordenar: event.target.value}, ()=> console.log(this.state.ordenar))
+    }
+    
     filtrarProdutos = () => {
         return this.props.produtos
         .filter((produto) => this.props.valorFiltroMinimo ? produto.preco >= this.props.valorFiltroMinimo : true)
         .filter((produto) => this.props.valorFiltroMaximo ? produto.preco <= this.props.valorFiltroMaximo : true)
         .filter((produto) => this.props.valorFiltroNome ? produto.nome.includes(this.props.valorFiltroNome) : true)
-        // .sort()
-        
+        .sort((a ,b) => this.state.ordenar === 'crescente' ? a.preco - b.preco : b.preco - a.preco) 
+        // .sort((a ,b) => this.state.ordenar === true ? a.preco - b.preco : b.preco - a.preco) por que não funciona?
+
         // return this.props.produtos.filter((produto) => {
             
         //     if (this.props.valorFiltroMaximo) {
@@ -78,7 +81,10 @@ export default class Produtos extends React.Component {
                     <p>Quantidade de produtos: {mostrarProdutos.length}</p>
                     <label>
                         Ordenação:
-                        <select onChange value>
+                        <select 
+                        onChange={this.produtoOrdenado}
+                        value={this.state.ordenar}
+                        >
                             <option value={'crescente'}>Crescente</option>
                             <option value={'decrescente'}>Decrescente</option>
                         </select>

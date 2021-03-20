@@ -14,12 +14,6 @@ flex-direction: column;
 
 export default class Filtro extends React.Component {
 
-    fitroProdutos = () => {
-        if(this.props.valorFiltroMinino > 10) {
-            
-        }
-    }
-
     render() {
         return (
             <AreaFiltro>

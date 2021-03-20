@@ -43,6 +43,16 @@ margin: 1rem;
 `
 
 export default class Carrinho extends React.Component {
+
+    valorTotal = () => {
+        let valorTotal = 0;
+        let array = this.props.produtoNoCarrinho
+        for (let i = 0; i < this.props.produtoNoCarrinho.length; i++) {
+            valorTotal += array[i].preco * array[i].quantidade
+        }
+        return valorTotal
+    }
+
     
     render() {
         const produtosNoCarrinho = this.props.produtoNoCarrinho.map((item) => {
@@ -50,7 +60,7 @@ export default class Carrinho extends React.Component {
                 <div>
                     <p>{item.quantidade}x</p>
                     <ItenProduto>{item.nome}</ItenProduto>
-                    <button>x</button>
+                    <button onClick={() => this.props.produtoRemovido(item.id)}>x</button>
                 </div>)
                 
         })
@@ -58,7 +68,7 @@ export default class Carrinho extends React.Component {
         return (<AreaCarrinho teste={this.props.mostrar}>
                 <CarrinhoH2>Carrinho</CarrinhoH2>
                 {produtosNoCarrinho}
-                <div>Valor total: R$ 200,00</div>
+                <div>Valor total: R$ {this.valorTotal()},00</div>
             </AreaCarrinho>
         )
     }

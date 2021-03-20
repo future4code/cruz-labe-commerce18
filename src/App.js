@@ -47,7 +47,7 @@ const produtos = [
   {id: 1,
   nome: "produto",
   imagem: "https://picsum.photos/200/200?a=1",
-  preco: 100,
+  preco: 300,
   },
   {id: 2,
     nome: "item",
@@ -57,7 +57,7 @@ const produtos = [
   {id: 3,
     nome: "trem",
     imagem: "https://picsum.photos/200/200?a=3",
-    preco: 300,
+    preco: 400,
   }
 ]
 
@@ -100,13 +100,11 @@ class App extends React.Component {
       const adicionadoNoCarrinho = this.state.produtoNoCarrinho.map((produto) => {
         
         if (idDoProduto === produto.id) {
-          console.log('segundo if')
           return {
             ...produto,
             quantidade: produto.quantidade +1
           }
         }
-        console.log('fora dos ifs')
         return produto
       })
       this.setState({produtoNoCarrinho: adicionadoNoCarrinho})
@@ -117,7 +115,23 @@ class App extends React.Component {
       
       this.setState({ produtoNoCarrinho: produtoAcumlado})
     }
-        
+    }
+
+  removerProduto = (idDoProduto) => {
+    
+    const produtoRemovido = this.state.produtoNoCarrinho.map((produto) => {
+
+      if (idDoProduto === produto.id) {
+        return {
+          ...produto,
+          quantidade: produto.quantidade -1
+        }
+      }
+      return produto
+    }).filter((produto) => produto.quantidade > 0)
+    
+    this.setState({produtoNoCarrinho: produtoRemovido})
+
   }
 
   render () {
@@ -157,6 +171,7 @@ class App extends React.Component {
           <Carrinho 
           mostrar={this.state.abreCarrinho}
           produtoNoCarrinho={this.state.produtoNoCarrinho}
+          produtoRemovido={this.removerProduto}
           />
         </AppContainer>
       </div>
