@@ -42,21 +42,100 @@ p {
 }
 `
 
+const produtos = [
+
+  {id: 1,
+  nome: "produto",
+  imagem: "https://picsum.photos/200/200?a=1",
+  preco: 300,
+  },
+  {id: 2,
+    nome: "item",
+    imagem: "https://picsum.photos/200/200?a=2",
+    preco: 200,
+  },
+  {id: 3,
+    nome: "trem",
+    imagem: "https://picsum.photos/200/200?a=3",
+    preco: 400,
+  }
+]
+
+
 class App extends React.Component {
   state = {
-    carrinho: false,
+    abreCarrinho: false,
+    filtroMinimo: 100,
+    filtroMaximo: "",
+    filtroNome: "",
+    produtoNoCarrinho: []
   }
 
   mostraCarrinho = () => {
-    if (this.state.carrinho) {
-      this.setState({carrinho: false})
-    } else {
-      this.setState({carrinho: true})
+    // if (this.state.abreCarrinho) {
+    //   this.setState({abreCarrinho: false})
+    // } else {
+    //   this.setState({abreCarrinho: true})
+    // }
+    return this.setState({ abreCarrinho: !this.state.abreCarrinho})
+  }
+
+  inputFiltroMinimo = (event) => {
+    this.setState({ filtroMinimo: event.target.value})
+  }
+
+  inputFiltroMaximo = (event) => {
+    this.setState({ filtroMaximo: event.target.value})
+  }
+
+  inputFiltroNome = (event) => {
+    this.setState({ filtroNome: event.target.value})
+  }
+
+  adicionarNoCarrinho = (idDoProduto) => {
+    const novoProduto = this.state.produtoNoCarrinho.find(produto => idDoProduto === produto.id)
+    // aramazenado o produto 1 com propriedads id,nome,imagem,preco,quantidade:2
+    if (novoProduto) {
+      
+      const adicionadoNoCarrinho = this.state.produtoNoCarrinho.map((produto) => {
+        
+        if (idDoProduto === produto.id) {
+          return {
+            ...produto,
+            quantidade: produto.quantidade +1
+          }
+        }
+        return produto
+      })
+      this.setState({produtoNoCarrinho: adicionadoNoCarrinho})
+    } else { 
+      const adicionarProduto = produtos.find(produto => idDoProduto === produto.id)
+
+      const produtoAcumlado = [...this.state.produtoNoCarrinho, {...adicionarProduto, quantidade: 1}]
+      
+      this.setState({ produtoNoCarrinho: produtoAcumlado})
     }
+    }
+
+  removerProduto = (idDoProduto) => {
+    
+    const produtoRemovido = this.state.produtoNoCarrinho.map((produto) => {
+
+      if (idDoProduto === produto.id) {
+        return {
+          ...produto,
+          quantidade: produto.quantidade -1
+        }
+      }
+      return produto
+    }).filter((produto) => produto.quantidade > 0)
+    
+    this.setState({produtoNoCarrinho: produtoRemovido})
+
   }
 
   render () {
-    console.log('props app',this.state.carrinho)
+    
     return (
       <div>
         <Header>
@@ -69,14 +148,31 @@ class App extends React.Component {
             <img 
             onClick={this.mostraCarrinho} 
             src={Cart}
-            mostrar={this.state.carrinho}
+            mostrar={this.state.abreCarrinho}
             />
           </div>
         </Header>
         <AppContainer>
-          <Filtro/>
-          <Produtos/>
-          <Carrinho mostrar={this.state.carrinho}/>
+          <Filtro 
+          valorFiltroMinimo={this.state.filtroMinimo}
+          alteraFiltroMinimo={this.inputFiltroMinimo}
+          valorFiltroMaximo={this.state.filtroMaximo}
+          alteraFiltroMaximo={this.inputFiltroMaximo}
+          valorFiltroNome={this.state.filtroNome}
+          alteraFiltroNome={this.inputFiltroNome}
+          />
+          <Produtos
+          produtos={produtos}
+          adicionarNoCarrinho={this.adicionarNoCarrinho}
+          valorFiltroMinimo={this.state.filtroMinimo}
+          valorFiltroMaximo={this.state.filtroMaximo}
+          valorFiltroNome={this.state.filtroNome}
+          />
+          <Carrinho 
+          mostrar={this.state.abreCarrinho}
+          produtoNoCarrinho={this.state.produtoNoCarrinho}
+          produtoRemovido={this.removerProduto}
+          />
         </AppContainer>
       </div>
     );

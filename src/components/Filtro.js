@@ -21,22 +21,25 @@ export default class Filtro extends React.Component {
                 <Label>
                     Valor mínimo:
                     <input
-                    type={Number}
-                    value={100}
+                    onChange={this.props.alteraFiltroMinimo}
+                    type={'number'}
+                    value={this.props.valorFiltroMinimo}
                     />
                 </Label>
                 <Label>
                     Valor máximo:
                     <input
-                    type={Number}
-                    value={1000}
+                    onChange={this.props.alteraFiltroMaximo}
+                    type={'number'}
+                    value={this.props.valorFiltroMaximo}
                     />
                 </Label>
                 <Label>
                     Buscar por nome:
                     <input
-                    type={'Text'}
-                    value={'Produto'}
+                    onChange={this.props.alteraFiltroNome}
+                    type={'text'}
+                    value={this.props.valorFiltroNome}
                     />
                 </Label>
             </AreaFiltro>

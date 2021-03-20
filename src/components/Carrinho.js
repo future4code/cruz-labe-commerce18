@@ -43,18 +43,32 @@ margin: 1rem;
 `
 
 export default class Carrinho extends React.Component {
+
+    valorTotal = () => {
+        let valorTotal = 0;
+        let array = this.props.produtoNoCarrinho
+        for (let i = 0; i < this.props.produtoNoCarrinho.length; i++) {
+            valorTotal += array[i].preco * array[i].quantidade
+        }
+        return valorTotal
+    }
+
     
     render() {
-        
-        console.log('props carrinho',this.props.mostrar)
+        const produtosNoCarrinho = this.props.produtoNoCarrinho.map((item) => {
+                return (
+                <div>
+                    <p>{item.quantidade}x</p>
+                    <ItenProduto>{item.nome}</ItenProduto>
+                    <button onClick={() => this.props.produtoRemovido(item.id)}>x</button>
+                </div>)
+                
+        })
+
         return (<AreaCarrinho teste={this.props.mostrar}>
                 <CarrinhoH2>Carrinho</CarrinhoH2>
-                <div>
-                    <p>1x</p>
-                    <ItenProduto>Produto 1</ItenProduto>
-                    <button>x</button>
-                </div>
-                <div>Valor total: R$ 200,00</div>
+                {produtosNoCarrinho}
+                <div>Valor total: R$ {this.valorTotal()},00</div>
             </AreaCarrinho>
         )
     }
