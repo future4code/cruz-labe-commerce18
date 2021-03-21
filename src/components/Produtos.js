@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const ContainerDivProduto = styled.div`
 flex: 3;
-padding: 20px;
+padding: 20px 20px 80px 20px;
 `
 
 const DivProduto = styled.div`
@@ -14,10 +14,24 @@ box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 margin: 5px;
 padding: 10px;
 
+p {
+    color: #1c2e4a;
+}
+
 button {
     border-radius: 16px;
-    height: 24px;
+    height: 26px;
+    width: 150px;
     outline: none;
+    color: #fff;
+    background-color: #1c2e4a;
+    border: none;
+    transition: .3s;
+    cursor: pointer;
+
+    :hover {
+        background-color: #2d466e;
+    }
 }
 `
 const DivQtdProduto = styled.div`
@@ -32,6 +46,7 @@ p {
 const AreaProduto = styled.div`
 display: flex;
 flex-wrap: wrap;
+justify-content: space-between;
 `
 
 export default class Produtos extends React.Component {
@@ -48,7 +63,7 @@ export default class Produtos extends React.Component {
         return this.props.produtos
         .filter((produto) => this.props.valorFiltroMinimo ? produto.preco >= this.props.valorFiltroMinimo : true)
         .filter((produto) => this.props.valorFiltroMaximo ? produto.preco <= this.props.valorFiltroMaximo : true)
-        .filter((produto) => this.props.valorFiltroNome ? produto.nome.includes(this.props.valorFiltroNome) : true)
+        .filter((produto) => this.props.valorFiltroNome ? produto.nome.toLowerCase().includes(this.props.valorFiltroNome) : true)
         .sort((a ,b) => this.state.ordenar === 'crescente' ? a.preco - b.preco : b.preco - a.preco) 
         // .sort((a ,b) => this.state.ordenar === true ? a.preco - b.preco : b.preco - a.preco) por que não funciona?
 
@@ -74,7 +89,7 @@ export default class Produtos extends React.Component {
             <DivProduto>
                 <img src={produtos.imagem}/>
                 <div>
-                    <p>{produtos.nome}</p>
+                    <p><strong>{produtos.nome}</strong></p>
                     <p>R$ {produtos.preco},00</p>
                     <button onClick={() => this.props.adicionarNoCarrinho(produtos.id)}>Adicionar ao carrinho</button>
                 </div>

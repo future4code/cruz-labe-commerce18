@@ -18,6 +18,7 @@ flex-direction: column;
 position: absolute;
 color: rgba(0,0,0,.6);
 top: 0;
+transition: .3s;
 `
 
 const InputValor = styled.input`
@@ -28,20 +29,10 @@ outline: none;
 margin: 10px 0;
 
     :focus ~ Label, :valid ~ Label {
-        transition: .3s;
         font-size: 12px;
         transform: translateY(-10px);
         color: #000;
     }
-`
-
-const TituloH2 = styled.h2`
-color: blue;
-
-:hover {
-    color: red;
-}
-
 `
 
 export default class Filtro extends React.Component {
