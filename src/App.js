@@ -148,6 +148,18 @@ class App extends React.Component {
     contador: 0
   }
 
+  componentDidUpdate() {
+    localStorage.setItem('produtosCarrinho', JSON.stringify(this.state.produtoNoCarrinho))  
+  };
+
+  componentDidMount() {
+   if(localStorage.getItem('produtosCarrinho')) {
+    const storageString = localStorage.getItem('produtosCarrinho')
+    const storageObjeto = JSON.parse(storageString)
+    this.setState({ produtoNoCarrinho: storageObjeto})
+   }
+  };
+
   mostraCarrinho = () => {
     // if (this.state.abreCarrinho) {
     //   this.setState({abreCarrinho: false})
