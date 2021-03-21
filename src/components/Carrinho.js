@@ -25,6 +25,8 @@ div {
         color: #fff;
         font-size: 1rem;
         font-weight: 500;
+        cursor: pointer;
+        outline: none;
     }
 }
 `
@@ -38,8 +40,11 @@ position: relative;
 cursor: pointer;
 `
 
-const ItenProduto = styled.p`
+const ItemProduto = styled.p`
 margin: 1rem;
+`
+const ValorTotal = styled.div`
+margin: 10px 0;
 `
 
 export default class Carrinho extends React.Component {
@@ -50,6 +55,7 @@ export default class Carrinho extends React.Component {
         for (let i = 0; i < this.props.produtoNoCarrinho.length; i++) {
             valorTotal += array[i].preco * array[i].quantidade
         }
+        
         return valorTotal
     }
 
@@ -59,7 +65,7 @@ export default class Carrinho extends React.Component {
                 return (
                 <div>
                     <p>{item.quantidade}x</p>
-                    <ItenProduto>{item.nome}</ItenProduto>
+                    <ItemProduto>{item.nome}</ItemProduto>
                     <button onClick={() => this.props.produtoRemovido(item.id)}>x</button>
                 </div>)
                 
@@ -68,7 +74,7 @@ export default class Carrinho extends React.Component {
         return (<AreaCarrinho teste={this.props.mostrar}>
                 <CarrinhoH2>Carrinho</CarrinhoH2>
                 {produtosNoCarrinho}
-                <div>Valor total: R$ {this.valorTotal()},00</div>
+                <ValorTotal>Valor total: R$ {this.valorTotal()},00</ValorTotal>
             </AreaCarrinho>
         )
     }

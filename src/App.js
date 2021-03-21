@@ -8,18 +8,27 @@ import Cart from './images/cart.svg';
 import Face from './images/facebook.svg';
 import Insta from './images/instagram.svg';
 import Twitter from './images/twitter.svg';
-// import satelite from './images/satelite-antigo.svg';
+import Satelite from './images/satelite.jpg';
+import Camisa from './images/camiseta.jpg';
+import Onibus from './images/onibus.jpg';
+import Meteoro from './images/meteoro.jpg';
+import Brinquedo from './images/brinquedo.jpg';
+import RoupaEspacial from './images/roupa-espacial.jpg';
+import ViagemEspacial from './images/viagem.jpg';
 
 const AppContainer = styled.div`
 display: flex;
 `
 const Header = styled.header`
+position: sticky;
+top: 0;
 display: flex;
 align-items: center;
 justify-content: space-between;
 height: 70px;
 background-color: #1c2e4a;
 padding: 0 2rem;
+z-index: 1;
 
 div {
   display: flex;
@@ -27,6 +36,24 @@ div {
 }
 
 div:nth-child(2) {
+  position: relative;
+  span {
+    font-weight: 500;
+    position: absolute;
+    top:-.3rem;
+    left: 30%;
+    color: #fff;
+    background-color: #20B2AA;
+    width: 18px;
+    height: 20px;
+    border-radius: 50%;
+    z-index: 1;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   img {
     width: 30px;
     cursor: pointer;
@@ -53,6 +80,7 @@ position: fixed;
 height: 70px;
 width: 100vw;
 bottom: 0;
+align-items: center;
 
 p {
   margin: 1 .5rem;
@@ -60,10 +88,12 @@ p {
   font-size: 1.1rem;
   color: #fff;
   text-align: center;
+  margin: 0 10px 0 36px;
 }
 
 img {
   width: 36px;
+  margin: 0 10px;
 }
 
 `
@@ -72,38 +102,37 @@ const produtos = [
 
   {id: 1,
   nome: "Satélite Antigo",
-  imagem: "https://picsum.photos/200/200?a=1",
-  // imagem: {satelite},
+  imagem: Satelite,
   preco: 800,
   },
   {id: 2,
     nome: "Camiseta Galática",
-    imagem: "https://picsum.photos/200/200?a=2",
+    imagem: Camisa,
     preco: 100,
   },
   {id: 3,
     nome: "Meteoro",
-    imagem: "https://picsum.photos/200/200?a=3",
+    imagem: Meteoro,
     preco: 500,
   },
   {id: 4,
     nome: "Viagem Espacial",
-    imagem: "https://picsum.photos/200/200?a=4",
+    imagem: ViagemEspacial,
     preco: 350,
   },
   {id: 5,
     nome: "Roupa Espacial",
-    imagem: "https://picsum.photos/200/200?a=5",
+    imagem: RoupaEspacial,
     preco: 300,
   },
   {id: 6,
     nome: "Brinquedo Intergalático",
-    imagem: "https://picsum.photos/200/200?a=6",
+    imagem: Brinquedo,
     preco: 150,
   },
   {id: 7,
     nome: "Ônibus Espacial",
-    imagem: "https://picsum.photos/200/200?a=7",
+    imagem: Onibus,
     preco: 950,
   }
 ]
@@ -115,8 +144,21 @@ class App extends React.Component {
     // filtroMinimo: ,
     // filtroMaximo: "",
     // filtroNome: "",
-    produtoNoCarrinho: []
+    produtoNoCarrinho: [],
+    contador: 0
   }
+
+  componentDidUpdate() {
+    localStorage.setItem('produtosCarrinho', JSON.stringify(this.state.produtoNoCarrinho))  
+  };
+
+  componentDidMount() {
+   if(localStorage.getItem('produtosCarrinho')) {
+    const storageString = localStorage.getItem('produtosCarrinho')
+    const storageObjeto = JSON.parse(storageString)
+    this.setState({ produtoNoCarrinho: storageObjeto})
+   }
+  };
 
   mostraCarrinho = () => {
     // if (this.state.abreCarrinho) {
@@ -162,7 +204,7 @@ class App extends React.Component {
       
       this.setState({ produtoNoCarrinho: produtoAcumlado})
     }
-    }
+  }
 
   removerProduto = (idDoProduto) => {
     
@@ -192,10 +234,12 @@ class App extends React.Component {
           </div>
           
           <div>
+            <span>{this.state.produtoNoCarrinho.length}</span>
             <img 
             onClick={this.mostraCarrinho} 
             src={Cart}
             mostrar={this.state.abreCarrinho}
+            title={'Acesse seu carrinho'}
             />
           </div>
         </Header>
@@ -219,6 +263,7 @@ class App extends React.Component {
           mostrar={this.state.abreCarrinho}
           produtoNoCarrinho={this.state.produtoNoCarrinho}
           produtoRemovido={this.removerProduto}
+          contador={this.state.contador}
           />
         </AppContainer>
         <Footer>
@@ -227,15 +272,19 @@ class App extends React.Component {
           </div>
           
           <div>
-            <img 
-            src={Face}
-            />
-            <img
-            src={Insta}
-            />
+            <a href={'https://www.facebook.com'} target={'_blank'}>
+              <img src={Face} />
+            </a>
+
+            <a href={'https://www.instagram.com'} target={'_blank'}>
+              <img src={Insta} />
+            </a>
+
+            <a href={'https://www.twitter.com'} target={'_blank'}>
             <img
             src={Twitter}
             />
+            </a>
           </div>
         </Footer>
       </div>
