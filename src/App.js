@@ -5,6 +5,10 @@ import Filtro from './components/Filtro';
 import Produtos from './components/Produtos';
 import Logo from './images/astronaut.svg';
 import Cart from './images/cart.svg';
+import Face from './images/facebook.svg';
+import Insta from './images/instagram.svg';
+import Twitter from './images/twitter.svg';
+// import satelite from './images/satelite-antigo.svg';
 
 const AppContainer = styled.div`
 display: flex;
@@ -42,22 +46,65 @@ p {
 }
 `
 
+const Footer = styled.footer`
+display: flex;
+background-color: #1c2e4a;
+position: fixed;
+height: 70px;
+width: 100vw;
+bottom: 0;
+
+p {
+  margin: 1 .5rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #fff;
+  text-align: center;
+}
+
+img {
+  width: 36px;
+}
+
+`
+
 const produtos = [
 
   {id: 1,
-  nome: "produto",
+  nome: "Satélite Antigo",
   imagem: "https://picsum.photos/200/200?a=1",
-  preco: 300,
+  // imagem: {satelite},
+  preco: 800,
   },
   {id: 2,
-    nome: "item",
+    nome: "Camiseta Galática",
     imagem: "https://picsum.photos/200/200?a=2",
-    preco: 200,
+    preco: 100,
   },
   {id: 3,
-    nome: "trem",
+    nome: "Meteoro",
     imagem: "https://picsum.photos/200/200?a=3",
-    preco: 400,
+    preco: 500,
+  },
+  {id: 4,
+    nome: "Viagem Espacial",
+    imagem: "https://picsum.photos/200/200?a=4",
+    preco: 350,
+  },
+  {id: 5,
+    nome: "Roupa Espacial",
+    imagem: "https://picsum.photos/200/200?a=5",
+    preco: 300,
+  },
+  {id: 6,
+    nome: "Brinquedo Intergalático",
+    imagem: "https://picsum.photos/200/200?a=6",
+    preco: 150,
+  },
+  {id: 7,
+    nome: "Ônibus Espacial",
+    imagem: "https://picsum.photos/200/200?a=7",
+    preco: 950,
   }
 ]
 
@@ -65,9 +112,9 @@ const produtos = [
 class App extends React.Component {
   state = {
     abreCarrinho: false,
-    filtroMinimo: 100,
-    filtroMaximo: "",
-    filtroNome: "",
+    // filtroMinimo: ,
+    // filtroMaximo: "",
+    // filtroNome: "",
     produtoNoCarrinho: []
   }
 
@@ -174,6 +221,23 @@ class App extends React.Component {
           produtoRemovido={this.removerProduto}
           />
         </AppContainer>
+        <Footer>
+          <div>
+            <p>Siga nossas redes sociais</p>
+          </div>
+          
+          <div>
+            <img 
+            src={Face}
+            />
+            <img
+            src={Insta}
+            />
+            <img
+            src={Twitter}
+            />
+          </div>
+        </Footer>
       </div>
     );
   }
