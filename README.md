@@ -1,16 +1,23 @@
 Sejam bem vindos ao LabCommerce!
+
 http://labcommerce.surge.sh/
 
 Projeto consiste em simular o funcionamento de uma loja virtual.
 
 O que funciona:
+
   Os filtros dos produtos por valor mínimo e máximo, e por nome
+  
   Adicionar os produtos no carrinho de compras
+  
   Remover os produtos do carrinho de compras
+  
   E manter sua lista de compras caso atualize a página.
 
 O que não funciona:
+
   Não é possivel efetuar/finalizar a compra
+  
   Não é possível alterar a quantidade de produtos no carrinho(é necessário clicar em adicionar ao carrinho, para aumentar a quantidade)
   
 Autores: Angelo O'Dwyer, Nathalia Mesquita e Rafael Orlando
